@@ -50,21 +50,6 @@
         android:key="category_display"
         android:title="@string/category_display">
 
-        <SwitchPreference
-            android:key="hbm"
-            android:title="@string/hbm_title"
-            android:summary="@string/hbm_summary" />
-
-        <Preference
-            android:key="auto_hbm_settings"
-            android:title="@string/auto_hbm_title"
-            android:summary="@string/auto_hbm_summary"
-            android:persistent="false" >
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="org.evolution.pixelparts"
-                    android:targetClass="org.evolution.pixelparts.autohbm.AutoHBMActivity" />
-        </Preference>
-
         <Preference
             android:key="saturation_settings"
             android:title="@string/saturation_title"

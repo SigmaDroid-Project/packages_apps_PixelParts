@@ -52,37 +52,16 @@
         <!-- PixelParts boot completed receiver -->
         <receiver
             android:name=".Startup"
-            android:exported="false">  
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <!-- HBM service -->
-        <service
-            android:name=".services.HBMService"
-            android:exported="false" />
-
-        <!-- Auto HBM service -->
-        <service
-            android:name=".services.AutoHBMService"
-            android:exported="false" />
-
         <!-- About activity -->
         <activity
             android:name=".about.AboutActivity"
             android:label="@string/pixel_parts_about_title"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <!-- Auto HBM activity -->
-        <activity
-            android:name=".autohbm.AutoHBMActivity"
-            android:label="@string/auto_hbm_title"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -137,11 +116,11 @@
         </service>
 
         <!-- Battery info tile service -->
-        <service  
+        <service
             android:name=".services.BatteryInfoTileService"
             android:label="@string/battery_info_title"
             android:icon="@drawable/ic_battery_info_tile"
-            android:exported="true"  
+            android:exported="true"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
@@ -149,11 +128,11 @@
         </service>
 
         <!-- Saturation tile service -->
-        <service  
+        <service
             android:name=".services.SaturationTileService"
             android:label="@string/saturation_title"
             android:icon="@drawable/ic_saturation_tile"
-            android:exported="true"  
+            android:exported="true"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
@@ -165,30 +144,6 @@
             android:name=".services.PixelTorchTileService"
             android:label="@string/pixeltorch_tile_title"
             android:icon="@drawable/ic_pixeltorch_tile"
-            android:exported="true"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
-
-        <!-- HBM tile service -->
-        <service
-            android:name=".services.HBMTileService"
-            android:label="@string/hbm_title"
-            android:icon="@drawable/ic_hbm_tile"
-            android:exported="true"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
-
-        <!-- Auto HBM tile service -->
-        <service
-            android:name=".services.AutoHBMTileService"
-            android:label="@string/auto_hbm_title"
-            android:icon="@drawable/ic_hbm_tile"
             android:exported="true"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>

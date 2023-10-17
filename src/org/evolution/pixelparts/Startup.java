@@ -12,7 +12,6 @@ import android.content.Intent;
 
 import org.evolution.pixelparts.saturation.Saturation;
 import org.evolution.pixelparts.services.PixelTorchTileService;
-import org.evolution.pixelparts.utils.AutoHBMUtils;
 import org.evolution.pixelparts.utils.ComponentUtils;
 import org.evolution.pixelparts.utils.TorchUtils;
 
@@ -27,9 +26,7 @@ public class Startup extends BroadcastReceiver {
         // PixelParts
         PixelParts.restoreStopChargingSetting(context);
         PixelParts.restoreStartChargingSetting(context);
-        PixelParts.restoreHBMSetting(context);
         PixelParts.restoreUSB2FastChargeSetting(context);
-        AutoHBMUtils.enableAutoHBM(context);
         Saturation.restoreSaturationSetting(context);
 
         // PixelTorchTileService

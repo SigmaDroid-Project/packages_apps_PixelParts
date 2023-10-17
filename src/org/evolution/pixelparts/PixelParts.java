@@ -34,7 +34,6 @@ import org.evolution.pixelparts.about.AboutActivity;
 import org.evolution.pixelparts.misc.Constants;
 import org.evolution.pixelparts.preferences.CustomSeekBarPreference;
 import org.evolution.pixelparts.R;
-import org.evolution.pixelparts.services.HBMService;
 import org.evolution.pixelparts.utils.FileUtils;
 import org.evolution.pixelparts.utils.TorchUtils;
 
@@ -48,10 +47,6 @@ public class PixelParts extends PreferenceFragment
     // Stop/Start charging preferences
     private CustomSeekBarPreference mStopChargingPreference;
     private CustomSeekBarPreference mStartChargingPreference;
-
-    // High brightness mode preferences/switches
-    private Preference mAutoHBMPreference;
-    private SwitchPreference mHBMSwitch;
 
     // USB 2.0 fast charge switch
     private SwitchPreference mUSB2FastChargeSwitch;
@@ -97,21 +92,6 @@ public class PixelParts extends PreferenceFragment
         } else {
             mStartChargingPreference.setSummary(getString(R.string.kernel_node_access_error));
             mStartChargingPreference.setEnabled(false);
-        }
-
-        // High brightness mode preferences/switches
-        mHBMSwitch = (SwitchPreference) findPreference(Constants.KEY_HBM);
-        mAutoHBMPreference = (Preference) findPreference(Constants.KEY_AUTO_HBM_SETTINGS);
-        if (FileUtils.isFileWritable(Constants.NODE_HBM)) {
-            mHBMSwitch.setEnabled(true);
-            mAutoHBMPreference.setEnabled(true);
-            mHBMSwitch.setChecked(sharedPrefs.getBoolean(Constants.KEY_HBM, false));
-            mHBMSwitch.setOnPreferenceChangeListener(this);
-        } else {
-            mHBMSwitch.setSummary(getString(R.string.kernel_node_access_error));
-            mAutoHBMPreference.setSummary(getString(R.string.kernel_node_access_error));
-            mHBMSwitch.setEnabled(false);
-            mAutoHBMPreference.setEnabled(false);
         }
 
         // LEDs (PixelTorch)
@@ -182,19 +162,6 @@ public class PixelParts extends PreferenceFragment
             sharedPrefs.edit().putInt(Constants.KEY_START_CHARGING, value).commit();
             FileUtils.writeValue(Constants.NODE_START_CHARGING, String.valueOf(value));
             return true;
-          // High brightness mode switch
-        } else if (preference == mHBMSwitch) {
-            boolean enabled = (Boolean) newValue;
-            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-            sharedPrefs.edit().putBoolean(Constants.KEY_HBM, enabled).commit();
-            FileUtils.writeValue(Constants.NODE_HBM, enabled ? "1" : "0");
-            Intent hbmServiceIntent = new Intent(this.getContext(), HBMService.class);
-            if (enabled) {
-                this.getContext().startService(hbmServiceIntent);
-            } else {
-                this.getContext().stopService(hbmServiceIntent);
-            }
-            return true;
           // USB 2.0 fast charge switch
         } else if (preference == mUSB2FastChargeSwitch) {
             boolean enabled = (Boolean) newValue;
@@ -224,15 +191,6 @@ public class PixelParts extends PreferenceFragment
             int value = sharedPrefs.getInt(Constants.KEY_START_CHARGING,
                     Integer.parseInt(FileUtils.getFileValue(Constants.NODE_START_CHARGING, Constants.DEFAULT_START_CHARGING)));
             FileUtils.writeValue(Constants.NODE_START_CHARGING, String.valueOf(value));
-        }
-    }
-
-    // High brightness mode switch
-    public static void restoreHBMSetting(Context context) {
-        if (FileUtils.isFileWritable(Constants.NODE_HBM)) {
-            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-            boolean value = sharedPrefs.getBoolean(Constants.KEY_HBM, false);
-            FileUtils.writeValue(Constants.NODE_HBM, value ? "1" : "0");
         }
     }
 
