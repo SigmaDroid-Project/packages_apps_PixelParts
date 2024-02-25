@@ -1,14 +1,9 @@
 ![example](https://raw.githubusercontent.com/Evolution-X-Devices/packages_apps_PixelParts/udc/readme_resources/PixelParts.png)
 
-## About the app
-
-PixelParts began as a simple High Brightness Mode (HBM) tool. Since then, it has evolved to include a detailed battery information panel, a display saturation level adjuster, charging limiter and more. The app now offers a wide range of features, transitioning from its original function as an HBM tool to a hub for device tweaks and stats on customs, with a lot more planned going forward.
-
 ## Current features
 
 | Category | Feature | Description | QS Tile | Required kernel changes |
 | --- | --- | --- | --- | --- |
-| **Battery** | `Battery information` | View various battery information | Yes |N/A |
 | | `Charge control` | Start/stop charging at specific percentages | N/A | N/A | 
 | | `Fast charge` | Enable CDP mode for faster charging on USB 2.0 ports. | Yes | [Commit 1/1](https://github.com/Evolution-X-Devices/kernel_google_gs101/commit/dcbfcd76bdc5d72e16f85fd8a48de6afa8804b61) |
 | **Display** | `Automatic high brightness mode (HBM)` | Enable peak luminance based on sunlight | Yes | N/A |
