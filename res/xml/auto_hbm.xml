@@ -15,10 +15,10 @@
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="auto_hbm"
         android:title="@string/auto_hbm_main_switch_title"
-        android:defaultValue="false" />
+        android:defaultValue="true" />
 
     <com.android.settingslib.widget.UsageProgressBarPreference
-        android:key="current_lux_level" 
+        android:key="current_lux_level"
         android:selectable="false" />
 
     <org.evolution.pixelparts.CustomSeekBarPreference

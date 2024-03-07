@@ -177,7 +177,7 @@ public class AutoHbmFragment extends PreferenceFragmentCompat
     public static void toggleAutoHbmService(Context context) {
         if (isHbmSupported(context)) {
             boolean isAutoHbmEnabled = PreferenceManager.getDefaultSharedPreferences(context)
-                    .getBoolean(Constants.KEY_AUTO_HBM, false);
+                    .getBoolean(Constants.KEY_AUTO_HBM, true);
 
             if (isAutoHbmEnabled && !mAutoHbmServiceEnabled) {
                 startAutoHbmService(context);
