@@ -18,6 +18,8 @@ import java.io.FileReader;
 import org.evolution.pixelparts.R;
 
 import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
 
 public class FileUtils {
 
@@ -60,17 +62,23 @@ public class FileUtils {
      */
     public static void writeValue(String filename, String value) {
         if (filename == null) {
+            Log.w(TAG, "Filename is null, write operation aborted.");
             return;
         }
-        try {
-            FileOutputStream fos = new FileOutputStream(new File(filename));
-            fos.write(value.getBytes());
-            fos.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        // First, read the current value.
+        String currentValue = readOneLine(filename);
+        // Compare the current value with the value to be written.
+        if (!value.equals(currentValue)) {
+        Log.d(TAG, "Attempting to write to file: " + filename + " Value: " + value);
+            try (FileOutputStream fos = new FileOutputStream(new File(filename))) {
+                fos.write(value.getBytes());
+                fos.flush();
+                Log.d(TAG, "Write operation successful to file: " + filename);
+            } catch (FileNotFoundException e) {
+                Log.w(TAG, "FileNotFoundException when trying to write to file: " + filename, e);
+            } catch (IOException e) {
+                Log.e(TAG, "IOException when trying to write to file: " + filename, e);
+            }
         }
     }
 
